@@ -82,16 +82,56 @@
 <a name='classes'>
 ## Classes
 * Avoid the usage of class (@@) variables due to their 'nasty' behavior in inheritance.
-* Use def self.method to define class methods. This makes the methods more resistant to refactoring changes.
+* Use `def self.method` to define class methods. This makes the methods more resistant to refactoring changes.
 
 <a name='exceptions'>
 ## Exceptions
+* Don't suppress exceptions.
+* Don't use exceptions for flow of control.
+* Avoid rescuing the `Exception` class.
 
 <a name='collections'>
 ## Collections
+* Use symbols instead of strings as hash keys.
+* Avoid the use of mutable object as hash keys.
+* Never modify a collection while traversing it.
 
 <a name='strings'>
 ## Strings
+* Prefer string interpolation instead of string concatenation:
+
+    ```Ruby
+    # bad
+    email_with_name = user.name + ' <' + user.email + '>'
+
+    # good
+    email_with_name = "#{user.name} <#{user.email}>"
+    ```
+
+* Prefer single-quoted strings when you don't need string interpolation or
+  special symbols such as `\t`, `\n`, `'`, etc.
+
+    ```Ruby
+    # bad
+    name = "Bozhidar"
+
+    # good
+    name = 'Bozhidar'
+    ```
+
+* Avoid using `String#+` when you need to construct large data chunks.
+  Instead, use `String#<<`. Concatenation mutates the string instance in-place
+  and is always faster than `String#+`, which creates a bunch of new string objects.
+
+    ```Ruby
+    # good and also fast
+    html = ''
+    html << '<h1>Page title</h1>'
+
+    paragraphs.each do |paragraph|
+      html << "<p>#{paragraph}</p>"
+    end
+    ```
 
 <a name='literals'>
 ## Percent Literals
