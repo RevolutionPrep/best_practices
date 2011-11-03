@@ -1,6 +1,6 @@
 # Mission
 
-    We value the leverage that can be gained through the usage of common practices in all of our programming processes. Having practices that define a 'best' approach for solving a particular problem allows us to evaluate and improve our practices on a continual basis. What follows is a living document of the best practices for building applications at Revolution Prep. We acknowledge that this document is incomplete and may suggest practices that lose favor over time. We consider this document to be a best effort at defining the collective discussion of our programming practices.
+  We value the leverage that can be gained through the usage of common practices in all of our programming processes. Having practices that define a 'best' approach for solving a particular problem allows us to evaluate and improve our practices on a continual basis. What follows is a living document of the best practices for building applications at Revolution Prep. We acknowledge that this document is incomplete and may suggest practices that lose favor over time. We consider this document to be a best effort at defining the collective discussion of our programming practices.
 
 ## Table of Contents
 
