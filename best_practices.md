@@ -1,11 +1,6 @@
 # Mission
 
-We value the leverage that can be gained through the usage of common practices in all of our programming processes.
-Having practices that define a 'best' approach for solving a particular problem allows us to evaluate and improve
-our practices on a continual basis.
-What follows is a living document of the best practices for building applications at Revolution Prep.
-We acknowledge that this document is incomplete and may suggest practices that lose favor over time.
-We consider this document to be a best effort at defining the collective discussion of our programming practices.
+    We value the leverage that can be gained through the usage of common practices in all of our programming processes. Having practices that define a 'best' approach for solving a particular problem allows us to evaluate and improve our practices on a continual basis. What follows is a living document of the best practices for building applications at Revolution Prep. We acknowledge that this document is incomplete and may suggest practices that lose favor over time. We consider this document to be a best effort at defining the collective discussion of our programming practices.
 
 ## Table of Contents
 
@@ -46,9 +41,8 @@ We consider this document to be a best effort at defining the collective discuss
 
 <a name='formatting'>
 ## Formatting
-  1. Formatting will not be enforced to the level of how many spaces or tabs to use when indenting your code,
-  but is important to increasing the readability of your code. Practices that increase scanning efficiency are
-  favored over those that increase mental overhead in decifering the overall code structure.
+    * Formatting will not be enforced to the level of how many spaces or tabs to use when indenting your code, but is important to increasing the readability of your code.
+    * Practices that increase scanning efficiency are favored over those that increase mental overhead in decifering the overall code structure.
 
 <a name='syntax'>
 ## Syntax
