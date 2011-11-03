@@ -41,6 +41,7 @@ We consider this document to be a best effort at defining the collective discuss
         * [Requests](#rspec-requests)
         * [Uploaders](#rspec-uploaders)
 
+<a name='ruby'>
 # Ruby
 
 <a name='formatting'>
