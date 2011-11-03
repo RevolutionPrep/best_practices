@@ -505,7 +505,7 @@ its source code first.
 <a name='rspec-controllers'>
 ### Controllers
 
-<a name='respec-models'>
+<a name='rspec-models'>
 ### Models
 * Do not mock the models in their own specs.
 * Use fabrication to make real objects.
