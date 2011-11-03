@@ -43,7 +43,7 @@
 
 <a name='formatting'>
 ## Formatting
-* Formatting will not be enforced to the level of how many spaces or tabs to use when indenting your code, but is important to increasing the readability of your code.
+* Formatting will not be enforced to the level of how many spaces or tabs to use when indenting your code, but is important for increasing the readability of your code.
 * Practices that increase scanning efficiency are favored over those that increase mental overhead in deciphering the overall code structure.
 
 <a name='syntax'>
