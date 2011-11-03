@@ -141,6 +141,22 @@
 
 <a name='design'>
 ## Design
+* Code in a functional way, avoiding mutation when that makes sense.
+* Do not mutate arguments unless that is the purpose of the method.
+* Do not mess around in core classes when writing libraries. (Do not monkey
+  patch them.)
+* [Do not program
+  defensively.](http://www.erlang.se/doc/programming_rules.shtml#HDR11)
+* Keep the code simple and subjective. Each method should have a single,
+  well-defined responsibility.
+* Avoid more than three levels of block nesting.
+* Don't overdesign. Overly complex solutions tend to be brittle and hard to
+  maintain.
+* Don't underdesign. A solution to a problem should be as simple as
+  possible, but no simpler than that. Poor initial design can lead to a lot
+  of problems in the future.
+* Be consistent. In an ideal world, be consistent with these guidelines.
+* Use common sense.
 
 <a name='language'>
 ## Know your language
