@@ -25,6 +25,7 @@
     * [Routing](#routing)
     * [Controllers](#controllers)
     * [Models](#models)
+        * [ActiveRecord](#activerecord)
     * [Migrations](#migrations)
     * [Views](#views)
     * [Mailers](#mailers)
@@ -36,7 +37,6 @@
         * [Models](#rspec-models)
         * [Mailers](#rspec-mailers)
         * [Requests](#rspec-requests)
-        * [Uploaders](#rspec-uploaders)
 
 <a name='ruby'>
 # Ruby
@@ -180,33 +180,324 @@
 
 <a name='configuration'>
 ## Configuration
+* Put custom initialization code in `config/initializers`. The code in
+  initializers executes on application startup.
+* The initialization code for each gem should be in a separate file
+  with the same name as the gem, for example `carrierwave.rb`,
+  `rails_admin.rb`, etc.
+* Adjust accordingly the settings for development, test and production
+  environment (in the corresponding files under `config/environments/`)
 
 <a name='routing'>
 ## Routing
+* When you need to add more actions to a RESTful resource (do you
+  really need them at all?) use `member` and `collection` routes.
+
+    ```Ruby
+    # bad
+    get 'subscriptions/:id/unsubscribe'
+    resources :subscriptions
+
+    # good
+    resources :subscriptions do
+      get 'unsubscribe', :on => :member
+    end
+
+    # bad
+    get 'photos/search'
+    resources :photos
+
+    # good
+    resources :photos do
+      get 'search', :on => :collection
+    end
+    ```
+
+* If you need to define multiple `member/collection` routes use the
+  alternative block syntax.
+
+    ```Ruby
+    resources :subscriptions do
+      member do
+        get 'unsubscribe'
+        # more routes
+      end
+    end
+
+    resources :photos do
+      collection do
+        get 'search'
+        # more routes
+      end
+    end
+    ```
+
+* Use nested routes to express better the relationship between
+  ActiveRecord models.
+
+    ```Ruby
+    class Post < ActiveRecord::Base
+      has_many :comments
+    end
+
+    class Comments < ActiveRecord::Base
+      belongs_to :post
+    end
+
+    # routes.rb
+    resources :posts do
+      resources :comments
+    end
+    ```
+
+* Use namespaced routes to group related actions.
+
+    ```Ruby
+    namespace :admin do
+      # Directs /admin/products/* to Admin::ProductsController
+      # (app/controllers/admin/products_controller.rb)
+      resources :products
+    end
+    ```
+
+* Never use the legacy wild controller route. This route will make all
+  actions in every controller accessible via GET requests.
+
+    ```Ruby
+    # very bad
+    match ':controller(/:action(/:id(.:format)))'
+    ```
 
 <a name='controllers'>
 ## Controllers
+* Keep the controllers skinny - they should only retrieve data for the view layer and shouldn't contain any business logic (all the business logic should naturally reside in the model).
 
 <a name='models'>
 ## Models
+* Introduce non-ActiveRecord model classes freely.
+* Name the models with meaningful (but short) names without abbreviations.
+
+<a name='activerecord'>
+### ActiveRecord
+* Avoid altering ActiveRecord defaults (table names, primary key, etc)
+  unless you have a very good reason (like a database that's not under
+  your control).
+* Group macro-style methods (`has_many`, `validates`, etc) in the
+  beginning of the class definition.
+* Always use the new
+  ["sexy" validations](http://thelucid.com/2010/01/08/sexy-validation-in-edge-rails-rails-3/).
+* When a custom validation is used more than once or the validation is some regular expression mapping,
+create a custom validator file.
+
+    ```Ruby
+    # bad
+    class Person
+      validates :email, format: { with: /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i }
+    end
+
+    # good
+    class EmailValidator < ActiveModel::EachValidator
+      def validate_each(record, attribute, value)
+        record.errors[attribute] << (options[:message] || 'is not a valid email') unless value =~ /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i
+      end
+    end
+
+
+    class Person
+      validates :email, email: true
+    end
+    ```
+
+* All custom validators should be moved to a shared gem.
+* Use named scopes freely.
+* When a named scope, defined with a lambda and parameters, becomes too
+complicated it is preferable to make a class method instead which serves
+the same purpose of the named scope and returns and
+`ActiveRecord::Relation` object.
+* Beware of the behavior of the `update_attribute` method. It doesn't
+  run the model validations (unlike `update_attributes`) and could easily corrupt the model state.
 
 <a name='migrations'>
 ## Migrations
+* Keep the `schema.rb` under version control.
+* Use `rake db:schema:load` instead of `rake db:migrate` to initialize
+  an empty database.
+* Avoid setting defaults in the tables themselves. Use the model layer
+  instead.
+
+    ```Ruby
+    def amount
+      read_attribute(:amount) or 0
+    end
+    ```
 
 <a name='views'>
 ## Views
+* Never call the model layer directly from a view.
+* Never make complex formatting in the views, export the formatting to
+  a method in a view helper or a decorator.
+* Mitigate code duplication by using partial templates and layouts.
 
 <a name='mailers'>
 ## Mailers
+* Name the mailers `SomethingMailer`. Without the Mailer suffix it
+  isn't immediately apparent what's a mailer and which views are
+  related to the mailer.
+* Provide both HTML and plain-text view templates.
+* Enable errors raised on failed mail delivery in your development environment. The errors are disabled by default.
+
+    ```Ruby
+    # config/environments/development.rb
+
+    config.action_mailer.raise_delivery_errors = true
+    ```
+
+* Use `smtp.gmail.com` for SMTP server in the development environment
+  (unless you have local SMTP server, of course).
+
+    ```Ruby
+    # config/environments/development.rb
+
+    config.action_mailer.smtp_settings = {
+      address: 'smtp.gmail.com',
+      # more settings
+    }
+    ```
+
+* Provide default settings for the host name.
+
+    ```Ruby
+    # config/environments/development.rb
+    config.action_mailer.default_url_options = {host: "#{local_ip}:3000"}
+
+
+    # config/environments/production.rb
+    config.action_mailer.default_url_options = {host: 'your_site.com'}
+
+    # in your mailer class
+    default_url_options[:host] = 'your_site.com'
+    ```
+
+* If you need to use a link to your site in an email, always use the
+  `_url`, not `_path` methods. The `_url` methods include the host
+  name and the `_path` methods don't.
+
+    ```Ruby
+    # wrong
+    You can always find more info about this course
+    = link_to 'here', url_for(course_path(@course))
+
+    # right
+    You can always find more info about this course
+    = link_to 'here', url_for(course_url(@course))
+    ```
+
+* Format the from and to addresses properly. Use the following format:
+
+    ```Ruby
+    # in your mailer class
+    default from: 'Your Name <info@your_site.com>'
+    ```
+
+* Make sure that the e-mail delivery method for your test environment is set to `test`:
+
+    ```Ruby
+    # config/environments/test.rb
+
+    config.action_mailer.delivery_method = :test
+    ```
+
+* The delivery method for development and production should be `smtp`:
+
+    ```Ruby
+    # config/environments/development.rb, config/environments/production.rb
+
+    config.action_mailer.delivery_method = :smtp
+    ```
 
 <a name='bundler'>
 ## Bundler
+* Put gems used only for development or testing in the appropriate group in the Gemfile.
+* Use only established gems in your projects. If you're contemplating
+on including some little-known gem you should do a careful review of
+its source code first.
+* Do not remove the `Gemfile.lock` from version control. This is not
+  some randomly generated file - it makes sure that all of your team
+  members get the same gem versions when they do a `bundle install`.
 
 <a name='testing'>
 # Testing
 
 <a name='rspec'>
 ## RSpec
+* Use just one expectation per example.
+
+    ```Ruby
+    # bad
+    describe ArticlesController do
+      #...
+
+      describe 'GET new' do
+        it 'assigns new article and renders the new article template' do
+          get :new
+          assigns[:article].should be_a_new Article
+          response.should render_template :new
+        end
+      end
+
+      # ...
+    end
+
+    # good
+    describe ArticlesController do
+      #...
+
+      describe 'GET new' do
+        it 'assigns a new article' do
+          get :new
+          assigns[:article].should be_a_new Article
+        end
+
+        it 'renders the new article template' do
+          get :new
+          response.should render_template :new
+        end
+      end
+
+    end
+    ```
+
+* Make heavy use of `describe` and `context`
+* Name the `describe` blocks as follows:
+  * use "description" for non-methods
+  * use pound "#method" for instance methods
+  * use dot ".method" for class methods
+
+    ```Ruby
+    class Article
+      def summary
+        #...
+      end
+
+      def self.latest
+        #...
+      end
+    end
+
+    # the spec...
+    describe Article
+      describe '#summary'
+        #...
+      end
+
+      describe '.latest'
+        #...
+      end
+    end
+    ```
+
+* Use [factories](https://github.com/thoughtbot/factory_girl) to create test
+  objects.
 
 <a name='rspec-views'>
 ### Views
@@ -216,14 +507,36 @@
 
 <a name='respec-models'>
 ### Models
+* Do not mock the models in their own specs.
+* Use fabrication to make real objects.
+* It is acceptable to mock other models or child objects.
 
 <a name='rspec-mailers'>
 ### Mailers
+* The model in the mailer spec should be mocked. The mailer should not depend on the model creation.
+* The mailer spec should verify that:
+  * the subject is correct
+  * the receiver e-mail is correct
+  * the e-mail is sent to the right e-mail address
+  * the e-mail contains the required information
+
+     ```Ruby
+     describe SubscriberMailer
+       let(:subscriber) { mock_model(Subscription, email: 'johndoe@test.com', name: 'John Doe') }
+
+       describe 'successful registration email'
+         subject { SubscriptionMailer.successful_registration_email(subscriber) }
+
+         its(:subject) { should == 'Successful Registration!' }
+         its(:from) { should == ['info@your_site.com'] }
+         its(:to) { should == [subscriber.email] }
+
+         it 'contains the subscriber name' do
+           subject.body.encoded.should match(subscriber.name)
+         end
+       end
+     end
+     ```
 
 <a name='rspec-requests'>
 ### Requests
-
-<a name='rspec-uploaders'>
-### Uploaders
-
-
