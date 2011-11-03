@@ -17,8 +17,7 @@
     * [Exceptions](#exceptions)
     * [Collections](#collections)
     * [Strings](#strings)
-    * [Percent Literals](#literals)
-    * [Miscellaneous](#misc)
+    * [Methods](#methods)
     * [Design](#design)
     * [Know Your Language](#language)
 * [Rails](#rails)
@@ -133,11 +132,12 @@
     end
     ```
 
-<a name='literals'>
-## Percent Literals
-
-<a name='miscellaneous'>
-## Miscellaneous
+<a name='methods'>
+## Methods
+* Avoid hashes as optional parameters. Does the method do too much?
+* Avoid methods longer than 10 LOC (lines of code). Ideally, most methods will be shorter than
+  5 LOC. Empty lines do not contribute to the relevant LOC.
+* Avoid parameter lists longer than three or four parameters.
 
 <a name='design'>
 ## Design
