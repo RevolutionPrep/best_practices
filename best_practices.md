@@ -11,7 +11,6 @@
 * [Ruby](#ruby)
     * [Formatting](#formatting)
     * [Syntax](#syntax)
-    * [Know Your Language](#language)
     * [Naming](#naming)
     * [Comments](#comments)
     * [Annotations](#annotations)
@@ -22,6 +21,7 @@
     * [Percent Literals](#literals)
     * [Miscellaneous](#misc)
     * [Design](#design)
+    * [Know Your Language](#language)
 * [Rails](#rails)
     * [Configuration](#configuration)
     * [Routing](#routing)
@@ -50,23 +50,6 @@
 
 <a name='syntax'>
 ## Syntax
-  
-<a name='language'>
-## Know your language
-  
-### Enumerable
-  This standard library is easily the most important one to understand. Most of our programming effort goes into gathering, organizing and manipulating collections of objects.
-  This is the sole purpose of this library. If you find yourself constructing an iterator by hand, then you are probably doing it wrong.
-
-### Hash
-
-### Array
-
-### Singleton
-
-### Net/HTTP
-
-### Forwardable/Delegate
 
 <a name='naming'>
 ## Naming
@@ -107,6 +90,23 @@
 
 <a name='design'>
 ## Design
+
+<a name='language'>
+## Know your language
+
+### Enumerable
+  This standard library is easily the most important one to understand. Most of our programming effort goes into gathering, organizing and manipulating collections of objects.
+  This is the sole purpose of this library. If you find yourself constructing an iterator by hand, then you are probably doing it wrong.
+
+### Hash
+
+### Array
+
+### Singleton
+
+### Net/HTTP
+
+### Forwardable/Delegate
 
 <a name='rails'>
 # Rails
