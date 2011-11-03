@@ -37,6 +37,7 @@
         * [Models](#rspec-models)
         * [Mailers](#rspec-mailers)
         * [Requests](#rspec-requests)
+* [Javascript](#javascript)
 
 <a name='ruby'>
 # Ruby
@@ -540,3 +541,6 @@ its source code first.
 
 <a name='rspec-requests'>
 ### Requests
+
+<a name='javascript'>
+# Javascript
