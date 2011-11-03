@@ -53,15 +53,20 @@
   
 <a name='language'>
 ## Know your language
-  1. Enumerable
-    This standard library is easily the most important one to understand. Most of our programming effort goes
-    into gathering, organizing and manipulating collections of objects. This is the sole purpose of this
-    library. If you find yourself constructing an iterator by hand, then you are probably doing it wrong.
-  2. Hash
-  3. Array
-  4. Singleton
-  5. Net/HTTP
-  6. Forwardable/Delegate
+  
+### Enumerable
+  This standard library is easily the most important one to understand. Most of our programming effort goes into gathering, organizing and manipulating collections of objects.
+  This is the sole purpose of this library. If you find yourself constructing an iterator by hand, then you are probably doing it wrong.
+
+### Hash
+
+### Array
+
+### Singleton
+
+### Net/HTTP
+
+### Forwardable/Delegate
 
 <a name='naming'>
 ## Naming
