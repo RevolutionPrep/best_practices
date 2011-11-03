@@ -41,30 +41,6 @@ We consider this document to be a best effort at defining the collective discuss
         * [Requests](#rspec-requests)
         * [Uploaders](#rspec-uploaders)
 
-<a name='testing'>
-# Testing
-
-<a name='rspec'>
-## RSpec
-
-<a name='rspec-views'>
-### Views
-
-<a name='rspec-controllers'>
-### Controllers
-
-<a name='respec-models'>
-### Models
-
-<a name='rspec-mailers'>
-### Mailers
-
-<a name='rspec-requests'>
-### Requests
-
-<a name='rspec-uploaders'>
-### Uploaders
-
 # Ruby
 
 <a name='formatting'>
