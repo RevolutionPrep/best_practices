@@ -1,10 +1,9 @@
 # Mission
-
-  We value the leverage that can be gained through the usage of common practices in all of our programming processes.
-  Having practices that define a 'best' approach for solving a particular problem allows us to evaluate and improve our practices on a continual basis.
-  What follows is a living document of the best practices for building applications at Revolution Prep.
-  We acknowledge that this document is incomplete and may suggest practices that lose favor over time.
-  We consider this document to be a best effort at defining the collective discussion of our programming practices.
+* We value the leverage that can be gained through the usage of common practices in all of our programming processes.
+* Having practices that define a 'best' approach for solving a particular problem allows us to evaluate and improve our practices on a continual basis.
+* What follows is a living document of the best practices for building applications at Revolution Prep.
+* We acknowledge that this document is incomplete and may suggest practices that lose favor over time.
+* We consider this document to be a best effort at defining the collective discussion of our programming practices.
 
 ## Table of Contents
 
@@ -45,14 +44,21 @@
 
 <a name='formatting'>
 ## Formatting
-  * Formatting will not be enforced to the level of how many spaces or tabs to use when indenting your code, but is important to increasing the readability of your code.
-  * Practices that increase scanning efficiency are favored over those that increase mental overhead in deciphering the overall code structure.
+* Formatting will not be enforced to the level of how many spaces or tabs to use when indenting your code, but is important to increasing the readability of your code.
+* Practices that increase scanning efficiency are favored over those that increase mental overhead in deciphering the overall code structure.
 
 <a name='syntax'>
 ## Syntax
 
 <a name='naming'>
 ## Naming
+* Use `snake_case` for methods and variables.
+* Use `CamelCase` for classes and modules.  (Keep acronyms like HTTP,
+  RFC, XML uppercase.)
+* Use `SCREAMING_SNAKE_CASE` for other constants.
+* The names of predicate methods (methods that return a boolean value)
+  should end in a question mark.
+  (i.e. `Array#empty?`).
 
 <a name='comments'>
 ## Comments
@@ -62,16 +68,21 @@
 
 <a name='annotations'>
 ## Annotations
-  1. Use TODO to note missing features that should be added at a later date.
-  2. Use FIXME to note broken code that needs to be fixed.
-  3. Use OPTIMIZE to note slow or inefficient code that may cause perfomance problems.
-  4. Use HACK to note code smells where questionable coding practices were used and should be refactored away.
-  5. Use REVIEW to note anything that should be looked at to confirm it is working as intended.
+* Use `TODO` to note missing features or functionality that should be
+  added at a later date.
+* Use `FIXME` to note broken code that needs to be fixed.
+* Use `OPTIMIZE` to note slow or inefficient code that may cause
+  performance problems.
+* Use `HACK` to note code smells where questionable coding practices
+  were used and should be refactored away.
+* Use `REVIEW` to note anything that should be looked at to confirm it
+  is working as intended. For example: `REVIEW: Are we sure this is how the
+  client does X currently?`
 
 <a name='classes'>
 ## Classes
-  * Avoid the usage of class (@@) variables due to their 'nasty' behavior in inheritance.
-  * Use def self.method to define class methods. This makes the methods more resistant to refactoring changes.
+* Avoid the usage of class (@@) variables due to their 'nasty' behavior in inheritance.
+* Use def self.method to define class methods. This makes the methods more resistant to refactoring changes.
 
 <a name='exceptions'>
 ## Exceptions
