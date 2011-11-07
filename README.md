@@ -52,19 +52,27 @@
 <a name='oop'>
 ## Follow best practices of object-oriented design and programming
 * Think through object models for new classes, using class diagrams if necessary.
+  * After you have something that you think makes sense to you, find someone else to explain it to.
+  * The point of object-oriented design is to make the human-overhead of understanding a codebase easier.
+    If you can't explain the design to another developer, then you have missed the point.
 * Try to make the object design reflect business reality as much as possible.
   * E.g., classes should not have a special "unassigned" section, just students not yet in a section.
 * Use design patterns.
+  * Even better, understand why the design pattern is a better solution to the specific problem you are trying to solve.
+  * We aren't in academia. Most of the problems we face on a daily basis have been solved already.
 * Make sure that each class only has code related to its own responsibilities.
   * Views should not query the database.
   * Models should not generate HTML.
   * Proctoring sessions should not grade exams.
+* Tell, don't ask.
+  * Objects should tell other objects to do something for them.
+  * They should not ask an object for their state so that they can do something that should be the responsibility of that object.
 
 <a name='dry'>
 ## Don't repeat yourself
-If you find yourself using the same code over and over, refractor it into a method. If you find yourself finding objects using the same complex logic over and over, make a scope.
-
-This is one of the core design principles of Rails, so Rails makes this fairly easy to follow.
+* If you find yourself using the same code over and over, refractor it into a method.
+* If you find yourself finding objects using the same complex logic over and over, make a scope.
+  * This is one of the core design principles of Rails, so Rails makes this fairly easy to follow.
 
 <a name='blnodb'>
 ## Put business logic in the code, not in the database
@@ -72,8 +80,11 @@ This is one of the core design principles of Rails, so Rails makes this fairly e
 * No default values
 * No triggers
 * Columns should not allow nulls only if you are very sure there is never a business case for them to be null
-
-Any exceptions to this should be very carefully considered.
+* Any exceptions to this should be very carefully considered. Some that have been considered already include:
+  * Ensuring the uniqueness of a column's values: Rails cannot ensure uniqueness through its validation. Uniqueness needs to be enforced at the database level. Use a unique index on that column.
+  * Columns with default values: default values can be enforced at the application-code level. Use
+  [this](#default_values)
+  to define them.
 
 <a name='simple_perf'>
 ## Take simple performance considerations into account
@@ -333,8 +344,7 @@ While it's not a good idea to prematurely tune for performance, there are severa
   beginning of the class definition.
 * Always use the new
   ["sexy" validations](http://thelucid.com/2010/01/08/sexy-validation-in-edge-rails-rails-3/).
-* When a custom validation is used more than once or the validation is some regular expression mapping,
-create a custom validator file.
+* When a custom validation is used more than once or the validation is some regular expression mapping, create a custom validator file.
 
     ```Ruby
     # bad
@@ -369,12 +379,13 @@ the same purpose of the named scope and returns and
 * Keep the `schema.rb` under version control.
 * Use `rake db:schema:load` instead of `rake db:migrate` to initialize
   an empty database.
+<a name='default_values'>
 * Avoid setting defaults in the tables themselves. Use the model layer
   instead.
 
     ```Ruby
     def amount
-      read_attribute(:amount) or 0
+      read_attribute(:amount) || 0
     end
     ```
 
