@@ -70,8 +70,10 @@
 
 <a name='dry'>
 ## Don't repeat yourself
-* If you find yourself using the same code over and over, refractor it into a method.
-* If you find yourself finding objects using the same complex logic over and over, make a scope.
+* If you find yourself using the same code over and over, refactor it into a method or object.
+  * Ruby is designed for objects. Having many small objects with unique responsibilities is how it is intended to be used.
+  * Do not be afraid to create plain-old Ruby objects. These are the most powerful tools Ruby gives you to solve problems.
+* If you find yourself finding objects using the same complex querying logic over and over, make a scope.
   * This is one of the core design principles of Rails, so Rails makes this fairly easy to follow.
 
 <a name='blnodb'>
@@ -82,7 +84,7 @@
 * Columns should not allow nulls only if you are very sure there is never a business case for them to be null
 * Any exceptions to this should be very carefully considered. Some that have been considered already include:
   * Ensuring the uniqueness of a column's values: Rails cannot ensure uniqueness through its validation. Uniqueness needs to be enforced at the database level. Use a unique index on that column.
-  * Columns with default values: default values can be enforced at the application-code level. Use
+  * Columns with default values: Default values can be enforced at the application-code level. Use
   [this](#default_values)
   to define them.
 
@@ -371,6 +373,31 @@ While it's not a good idea to prematurely tune for performance, there are severa
 complicated it is preferable to make a class method instead which serves
 the same purpose of the named scope and returns and
 `ActiveRecord::Relation` object.
+
+    ```Ruby
+    # complex
+    class Student
+      scope :with_upcoming_meetings,  joins('LEFT JOIN `rev_section_transcript` ON `rev_section_transcript`.`user_id` = `rev_user`.`user_id`').
+                                      joins('LEFT JOIN `rev_schedule` ON `rev_schedule`.`section_id` = `rev_section_transcript`.`section_id`').
+                                      where('`rev_schedule`.`meeting_date` > NOW() AND `rev_schedule`.`meeting_date` < DATE_ADD(NOW(), INTERVAL 1 DAY)').
+                                      group('`rev_user`.`user_id`')
+    end
+
+    # simpler
+    class Student
+
+      def self.with_meetings_in_last_day
+        joins('LEFT JOIN `rev_section_transcript` ON `rev_section_transcript`.`user_id` = `rev_user`.`user_id`').
+        joins('LEFT JOIN `rev_schedule` ON `rev_schedule`.`section_id` = `rev_section_transcript`.`section_id`').
+        where('`rev_schedule`.`meeting_date` > NOW() AND `rev_schedule`.`meeting_date` < DATE_ADD(NOW(), INTERVAL 1 DAY)')
+      end
+
+      scope :by_user_id, group('`rev_user`.`user_id`')
+      scope :with_upcoming_meetings, with_meetings_in_last_day.by_user_id
+
+    end
+    ```
+
 * Beware of the behavior of the `update_attribute` method. It doesn't
   run the model validations (unlike `update_attributes`) and could easily corrupt the model state.
 
