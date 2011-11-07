@@ -5,8 +5,19 @@
 * We acknowledge that this document is incomplete and may suggest practices that lose favor over time.
 * We consider this document to be a best effort at defining the collective discussion of our programming practices.
 
+# Core principles
+* Follow best practices of object-oriented design and programming.
+* Don't repeat yourself.
+* Put business logic in the code, not in the database.
+* Take simple performance considerations into account.
+
 ## Table of Contents
 
+* [More details on the core principles](#core_details)
+  * [Follow best practices of object-oriented design and programming](#oop)
+  * [Don't repeat yourself](#dry)
+  * [Put business logic in code not database](#blnodb)
+  * [Take simple performance considerations into account](#simple_perf)
 * [Ruby](#ruby)
     * [Formatting](#formatting)
     * [Syntax](#syntax)
@@ -38,6 +49,45 @@
         * [Mailers](#rspec-mailers)
         * [Requests](#rspec-requests)
 * [Javascript](#javascript)
+
+<a name='core_details'>
+# More details on the core principles
+
+<a name='oop'>
+## Follow best practices of object-oriented design and programming
+* Think through object models for new classes, using class diagrams if necessary.
+* Try to make the object design reflect business reality as much as possible.
+  * E.g., classes should not have a special "unassigned" section, just students not yet in a section.
+* Use design patterns.
+* Make sure that each class only has code related to its own responsibilities.
+  * Views should not query the database.
+  * Models should not generate HTML.
+  * Proctoring sessions should not grade exams.
+
+<a name='dry'>
+## Don't repeat yourself
+If you find yourself using the same code over and over, refractor it into a method. If you find yourself finding objects using the same complex logic over and over, make a scope.
+
+This is one of the core design principles of Rails, so Rails makes this fairly easy to follow.
+
+<a name='blnodb'>
+## Put business logic in the code, not in the database
+* No foreign key constraints
+* No default values
+* No triggers
+* Columns should not allow nulls only if you are very sure there is never a business case for them to be null
+
+Any exceptions to this should be very carefully considered.
+
+<a name='simple_perf'>
+## Take simple performance considerations into account
+While it's not a good idea to prematurely tune for performance, there are several easy things that everyone should stay aware of:
+
+* Make sure that there are indexes on columns in MySQL tables that are involved in where clauses of queries.
+* Don't do slow functions inside a loop if they can be moved out of it.
+  * Use include if you know you will need all of the objects in a has_many relationship with the object you're fetching.
+  * Make sure any API calls happen outside loops.
+* Push off slow functions to the job servers using send_later.
 
 <a name='ruby'>
 # Ruby
