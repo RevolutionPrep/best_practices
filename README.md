@@ -73,7 +73,8 @@
 * If you find yourself using the same code over and over, refactor it into a method or object.
   * Ruby is designed for objects. Having many small objects with unique responsibilities is how it is intended to be used.
   * Do not be afraid to create plain-old Ruby objects. These are the most powerful tools Ruby gives you to solve problems.
-* If you find yourself finding objects using the same complex querying logic over and over, make a scope.
+* If you find yourself finding objects using the same complex querying logic over and over, make a
+[scope](#scopes).
   * This is one of the core design principles of Rails, so Rails makes this fairly easy to follow.
 
 <a name='blnodb'>
@@ -368,6 +369,7 @@ While it's not a good idea to prematurely tune for performance, there are severa
     ```
 
 * All custom validators should be moved to a shared gem.
+<a name='scopes'>
 * Use named scopes freely.
 * When a named scope, defined with a lambda and parameters, becomes too
 complicated it is preferable to make a class method instead which serves
