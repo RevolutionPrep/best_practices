@@ -377,22 +377,22 @@ the same purpose of the named scope and returns and
     ```Ruby
     # complex
     class Student
-      scope :with_upcoming_meetings,  joins('LEFT JOIN `rev_section_transcript` ON `rev_section_transcript`.`user_id` = `rev_user`.`user_id`').
-                                      joins('LEFT JOIN `rev_schedule` ON `rev_schedule`.`section_id` = `rev_section_transcript`.`section_id`').
-                                      where('`rev_schedule`.`meeting_date` > NOW() AND `rev_schedule`.`meeting_date` < DATE_ADD(NOW(), INTERVAL 1 DAY)').
-                                      group('`rev_user`.`user_id`')
+      scope :with_upcoming_meetings,  joins('LEFT JOIN `enrollments` ON `student`.`id` = `enrollments`.`student_id`').
+                                      joins('LEFT JOIN `meetings` ON `enrollments`.`course_id` = `meetings`.`course_id`).
+                                      where('`meetings`.`starts_at` > NOW() AND `meetings`.`starts_at` < DATE_ADD(NOW(), INTERVAL 1 DAY)').
+                                      group('`student`.`user_id`')
     end
 
     # simpler
     class Student
 
       def self.with_meetings_in_last_day
-        joins('LEFT JOIN `rev_section_transcript` ON `rev_section_transcript`.`user_id` = `rev_user`.`user_id`').
-        joins('LEFT JOIN `rev_schedule` ON `rev_schedule`.`section_id` = `rev_section_transcript`.`section_id`').
-        where('`rev_schedule`.`meeting_date` > NOW() AND `rev_schedule`.`meeting_date` < DATE_ADD(NOW(), INTERVAL 1 DAY)')
+        joins('LEFT JOIN `enrollments` ON `student`.`id` = `enrollments`.`student_id`').
+        joins('LEFT JOIN `meetings` ON `enrollments`.`course_id` = `meetings`.`course_id`').
+        where('`meetings`.`starts_at` > NOW() AND `meetings`.`starts_at` < DATE_ADD(NOW(), INTERVAL 1 DAY)')
       end
 
-      scope :by_user_id, group('`rev_user`.`user_id`')
+      scope :by_user_id, group('`students`.`user_id`')
       scope :with_upcoming_meetings, with_meetings_in_last_day.by_user_id
 
     end
