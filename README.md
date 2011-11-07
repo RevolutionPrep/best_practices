@@ -6,18 +6,14 @@
 * We consider this document to be a best effort at defining the collective discussion of our programming practices.
 
 # Core principles
-* Follow best practices of object-oriented design and programming.
-* Don't repeat yourself.
-* Put business logic in the code, not in the database.
-* Take simple performance considerations into account.
-
-## Table of Contents
-
-* [More details on the core principles](#core_details)
   * [Follow best practices of object-oriented design and programming](#oop)
   * [Don't repeat yourself](#dry)
   * [Put business logic in code not database](#blnodb)
   * [Take simple performance considerations into account](#simple_perf)
+
+## Table of Contents
+
+* [Core Principles In Detail](#core_details)
 * [Ruby](#ruby)
     * [Formatting](#formatting)
     * [Syntax](#syntax)
@@ -51,7 +47,7 @@
 * [Javascript](#javascript)
 
 <a name='core_details'>
-# More details on the core principles
+# Core Principles In Detail
 
 <a name='oop'>
 ## Follow best practices of object-oriented design and programming
