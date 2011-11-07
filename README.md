@@ -378,7 +378,7 @@ the same purpose of the named scope and returns and
     # complex
     class Student
       scope :with_upcoming_meetings,  joins('LEFT JOIN `enrollments` ON `student`.`id` = `enrollments`.`student_id`').
-                                      joins('LEFT JOIN `meetings` ON `enrollments`.`course_id` = `meetings`.`course_id`).
+                                      joins('LEFT JOIN `meetings` ON `enrollments`.`course_id` = `meetings`.`course_id`').
                                       where('`meetings`.`starts_at` > NOW() AND `meetings`.`starts_at` < DATE_ADD(NOW(), INTERVAL 1 DAY)').
                                       group('`student`.`user_id`')
     end
