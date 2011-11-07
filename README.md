@@ -477,7 +477,10 @@ its source code first.
 
 <a name='rspec'>
 ## RSpec
-* Use just one expectation per example.
+* Strive to have specs that fail gracefully, with output that would be relevent to the person debugging the issue.
+  * An easy way to ensure relevent error messages is to write specs that only have one assertion.
+  * This is not dogma. The key is to have specs that tell you why they failed in a way that is easy to understand.
+  * You could write a custom matcher that accomplishes this same goal.
 
     ```Ruby
     # bad
