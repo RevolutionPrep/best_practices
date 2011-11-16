@@ -6,9 +6,9 @@
 
 <a name="pio">
 ## PIO - Premium Instructor Online
-Uses desmos
+  Uses desmos
 
 <a name="desmos">
 ## Desmos
-http://desmos.com
-Virtual Whiteboard
+  http://desmos.com
+  Virtual Whiteboard
