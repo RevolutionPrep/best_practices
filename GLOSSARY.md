@@ -10,5 +10,5 @@
 
 <a name="desmos">
 ## Desmos
-  http://desmos.com
   Virtual Whiteboard
+  http://desmos.com
