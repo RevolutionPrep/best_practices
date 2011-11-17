@@ -241,6 +241,10 @@ While it's not a good idea to prematurely tune for performance, there are severa
   * The performance implications of using Array operations instead of Set operations when operating on large collections.
 
 ### [Singleton](http://www.ruby-doc.org/stdlib-1.8.7/libdoc/singleton/rdoc/Singleton.html)
+* It should be noted that the singleton is often an anti-pattern.
+* Even worse, this standard library is probably the most ineffective way to implement such a design pattern.
+* Instead, use modules with `extend self` or `module_function` to enable a much simpler interface.
+* It should be restated the the singleton is often an anti-pattern.
 
 ### [Net/HTTP](http://www.ruby-doc.org/stdlib-1.8.7/libdoc/net/http/rdoc/Net/HTTP.html)
 
