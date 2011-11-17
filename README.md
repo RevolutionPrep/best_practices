@@ -247,8 +247,12 @@ While it's not a good idea to prematurely tune for performance, there are severa
 * It should be restated the the singleton is often an anti-pattern.
 
 ### [Net/HTTP](http://www.ruby-doc.org/stdlib-1.8.7/libdoc/net/http/rdoc/Net/HTTP.html)
+* This library uses a very strange style.
+* When using it, wrap the default procedural calls in a reusable method, inside of a reusable class. Then, use this object in all other places that you would like to make HTTP requests.
 
 ### [Forwardable](http://www.ruby-doc.org/stdlib-1.8.7/libdoc/forwardable/rdoc/Forwardable.html)/[Delegate](http://www.ruby-doc.org/stdlib-1.8.7/libdoc/delegate/rdoc/)
+* These libraries are helpful tools when it comes to implementing the delegator or interface patterns.
+* Rails also has a `delegate` method that comes with [ActiveSupport](https://github.com/rails/rails/blob/1b819d32f6302e300da0188c4edb0f3b7bd48886/activesupport/lib/active_support/core_ext/module/delegation.rb)
 
 <a name='rails'>
 # Rails
