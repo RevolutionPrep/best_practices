@@ -325,6 +325,7 @@ While it's not a good idea to prematurely tune for performance, there are severa
       resources :comments
     end
     ```
+* Avoid nesting routes more than two levels deep.
 
 * Use namespaced routes to group related actions.
 
