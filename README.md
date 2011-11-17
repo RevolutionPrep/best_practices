@@ -226,10 +226,14 @@ While it's not a good idea to prematurely tune for performance, there are severa
 ## Know your language
 
 ### [Enumerable](http://www.ruby-doc.org/core-1.8.7/Enumerable.html)
-  This standard library is easily the most important one to understand. Most of our programming effort goes into gathering, organizing and manipulating collections of objects.
-  This is the sole purpose of this library. If you find yourself constructing an iterator by hand, then you are probably doing it wrong.
+* This standard library is easily the most important one to understand. Most of our programming effort goes into gathering, organizing and manipulating collections of objects.
+* This is the sole purpose of this library. If you find yourself constructing an iterator by hand, then you are probably doing it wrong.
 
 ### [Hash](http://www.ruby-doc.org/core-1.8.7/Hash.html)
+* All developers should understand the following:
+  * What the underlying implementation of Ruby's hash is.
+  * How to define default values.
+  * The difference between `hash[:key]` and `hash.fetch(:key)`
 
 ### [Array](http://www.ruby-doc.org/core-1.8.7/Array.html)
 
