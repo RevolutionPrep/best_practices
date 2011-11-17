@@ -352,6 +352,10 @@ While it's not a good idea to prematurely tune for performance, there are severa
 <a name='models'>
 ## Models
 * Introduce non-ActiveRecord model classes freely.
+* Models should map to the domain concepts, not the tables in the database.
+  * Tables in a database are an implementation detail for the purpose of persistence and should not guide the domain modeling process.
+  * Try implementing the domain concept with pure Ruby objects and then introducing persistence later. It will change the way you build models.
+  * [Food for thought](http://solnic.eu/2011/08/01/making-activerecord-models-thin.html)
 * Name the models with meaningful (but short) names without abbreviations.
 
 <a name='activerecord'>
