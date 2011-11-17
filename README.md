@@ -233,9 +233,12 @@ While it's not a good idea to prematurely tune for performance, there are severa
 * All developers should understand the following:
   * What the underlying implementation of Ruby's hash is.
   * How to define default values.
-  * The difference between `hash[:key]` and `hash.fetch(:key)`
+  * The difference between `hash[:key]` and `hash.fetch(:key)`.
 
 ### [Array](http://www.ruby-doc.org/core-1.8.7/Array.html)
+* All developers should understand the following:
+  * The difference between `array[index]` and `array.fetch(index)`
+  * The performance implications of using Array operations instead of Set operations when operating on large collections.
 
 ### [Singleton](http://www.ruby-doc.org/stdlib-1.8.7/libdoc/singleton/rdoc/Singleton.html)
 
