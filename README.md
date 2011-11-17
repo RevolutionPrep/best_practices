@@ -51,6 +51,9 @@
 
 <a name='oop'>
 ## Follow best practices of object-oriented design and programming
+* Use objects.
+  * Avoid passing around unstructured data (e.g. deeply-nested hashes or arrays with specialized position information).
+  * Instead, convert this data into objects and assign names to them. These names hopefully map to the domain concepts you are trying to model.
 * Think through object models for new classes, using class diagrams if necessary.
   * After you have something that you think makes sense to you, find someone else to explain it to.
   * The point of object-oriented design is to make the human-overhead of understanding a codebase easier.
@@ -122,9 +125,9 @@ While it's not a good idea to prematurely tune for performance, there are severa
 
 <a name='comments'>
 ## Comments
-  The best code is code that does not require comments. However, comments are helpful to explaining the purpose
+  The best code is code that does not require comments. However, comments are helpful in explaining the purpose
   of classes and modules. Having a high-level understanding of the domain concept an object embodies is very
-  helpful. We should strive to have documentation within all classes and modules that fulfills this role.
+  helpful. We should strive to have documentation that fulfills this role within all classes and modules.
 
 <a name='annotations'>
 ## Annotations
@@ -146,7 +149,7 @@ While it's not a good idea to prematurely tune for performance, there are severa
 
 <a name='exceptions'>
 ## Exceptions
-* Don't suppress exceptions.
+* Don't suppress exceptions. This is especially important for our tests.  If your code is suppressing exceptions, bugs could slip by the test suite without causing failures.
 * Don't use exceptions for flow of control.
 * Avoid rescuing the `Exception` class.
 
@@ -208,7 +211,7 @@ While it's not a good idea to prematurely tune for performance, there are severa
   patch them.)
 * [Do not program
   defensively.](http://www.erlang.se/doc/programming_rules.shtml#HDR11)
-* Keep the code simple and subjective. Each method should have a single,
+* Keep the code simple and subjective. Each method, and class should have a single,
   well-defined responsibility.
 * Avoid more than three levels of block nesting.
 * Don't overdesign. Overly complex solutions tend to be brittle and hard to
@@ -222,19 +225,19 @@ While it's not a good idea to prematurely tune for performance, there are severa
 <a name='language'>
 ## Know your language
 
-### Enumerable
+### [Enumerable](http://www.ruby-doc.org/core-1.8.7/Enumerable.html)
   This standard library is easily the most important one to understand. Most of our programming effort goes into gathering, organizing and manipulating collections of objects.
   This is the sole purpose of this library. If you find yourself constructing an iterator by hand, then you are probably doing it wrong.
 
-### Hash
+### [Hash](http://www.ruby-doc.org/core-1.8.7/Hash.html)
 
-### Array
+### [Array](http://www.ruby-doc.org/core-1.8.7/Array.html)
 
-### Singleton
+### [Singleton](http://www.ruby-doc.org/stdlib-1.8.7/libdoc/singleton/rdoc/Singleton.html)
 
-### Net/HTTP
+### [Net/HTTP](http://www.ruby-doc.org/stdlib-1.8.7/libdoc/net/http/rdoc/Net/HTTP.html)
 
-### Forwardable/Delegate
+### [Forwardable](http://www.ruby-doc.org/stdlib-1.8.7/libdoc/forwardable/rdoc/Forwardable.html)/[Delegate](http://www.ruby-doc.org/stdlib-1.8.7/libdoc/delegate/rdoc/)
 
 <a name='rails'>
 # Rails
