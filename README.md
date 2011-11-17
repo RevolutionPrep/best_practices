@@ -38,12 +38,12 @@
     * [Bundler](#bundler)
 * [Testing](#testing)
     * [RSpec](#rspec)
-        * [Views](#rspec-views)
-        * [Controllers](#rspec-controllers)
         * [Models](#rspec-models)
         * [Mailers](#rspec-mailers)
         * [Requests](#rspec-requests)
 * [Javascript](#javascript)
+  * [Object-Oriented JS](#oo-js)
+  * [Functional JS](#functional-js)
 
 <a name='core_details'>
 # Core Principles In Detail
@@ -616,19 +616,12 @@ its source code first.
     end
     ```
 
-* Use [factories](https://github.com/thoughtbot/factory_girl) to create test
-  objects.
-
-<a name='rspec-views'>
-### Views
-
-<a name='rspec-controllers'>
-### Controllers
+* Use [factories](https://github.com/thoughtbot/factory_girl) to create test objects.
 
 <a name='rspec-models'>
 ### Models
 * Do not mock the models in their own specs.
-* Use fabrication to make real objects.
+* Use [factories](https://github.com/thoughtbot/factory_girl) to create test objects.
 * It is acceptable to mock other models or child objects.
 
 <a name='rspec-mailers'>
@@ -663,3 +656,17 @@ its source code first.
 
 <a name='javascript'>
 # Javascript
+
+<a name='oo-js'>
+## Object-Oriented JS
+* Javascript has a very powerful object-oriented model.
+* Learn how to use this to namespace your functions.
+* [Here](http://www.klauskomenda.com/code/javascript-programming-patterns/) are several patterns that make working with Javascript more like other OO languages.
+
+<a name='functional-js'>
+## Functional JS
+* Javascript's functional programming paradigms are what makes it truly powerful.
+* You should understand what [higher-order functions](http://en.wikipedia.org/wiki/Higher-order_function),
+[callbacks](http://recurial.com/programming/understanding-callback-functions-in-javascript/),
+and [closures](http://robertnyman.com/2008/10/09/explaining-javascript-scope-and-closures/)
+are and how and when to use them.
