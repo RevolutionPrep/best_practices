@@ -16,7 +16,6 @@
 * [Core Principles In Detail](#core_details)
 * [Ruby](#ruby)
     * [Formatting](#formatting)
-    * [Syntax](#syntax)
     * [Naming](#naming)
     * [Comments](#comments)
     * [Annotations](#annotations)
@@ -109,9 +108,6 @@ While it's not a good idea to prematurely tune for performance, there are severa
 ## Formatting
 * Formatting will not be enforced to the level of how many spaces or tabs to use when indenting your code, but is important for increasing the readability of your code.
 * Practices that increase scanning efficiency are favored over those that increase mental overhead in deciphering the overall code structure.
-
-<a name='syntax'>
-## Syntax
 
 <a name='naming'>
 ## Naming
@@ -264,6 +260,7 @@ While it's not a good idea to prematurely tune for performance, there are severa
 * The initialization code for each gem should be in a separate file
   with the same name as the gem, for example `carrierwave.rb`,
   `rails_admin.rb`, etc.
+* Initializers should read-in configuration data from YAML files that are not checked-in to the repository. This is to reduce configuration conflicts across environments.
 * Adjust accordingly the settings for development, test and production
   environment (in the corresponding files under `config/environments/`)
 
