@@ -388,7 +388,6 @@ While it's not a good idea to prematurely tune for performance, there are severa
     end
     ```
 
-* All custom validators should be moved to a shared gem.
 <a name='scopes'>
 * Use named scopes freely.
 * When a named scope, defined with a lambda and parameters, becomes too
@@ -422,6 +421,13 @@ the same purpose of the named scope and returns and
 
 * Beware of the behavior of the `update_attribute` method. It doesn't
   run the model validations (unlike `update_attributes`) and could easily corrupt the model state.
+
+* Avoid callbacks such as `before_create` and `after_save`.
+  * Instead, try wrapping the domain concept in a higher-level model that makes it its responsibility to ensure these actions occur at the right times.
+  * It is more clear.
+  * It avoids possible infinite-loop or callback ordering issues.
+  * It reduces the responsibilities of the class.
+  * It reduces coupling.
 
 <a name='migrations'>
 ## Migrations
