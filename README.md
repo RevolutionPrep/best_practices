@@ -388,7 +388,7 @@ While it's not a good idea to prematurely tune for performance, there are severa
     end
     ```
 
-* Use named scopes freely.
+* Use named scopes freely.<a name='scopes' >
 * When a named scope, defined with a lambda and parameters, becomes too
 complicated it is preferable to make a class method instead which serves
 the same purpose of the named scope and returns and
