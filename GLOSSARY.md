@@ -6,7 +6,8 @@
 
 <a name="pio">
 ## PIO - Premium Instructor Online
-  Uses desmos
+  Uses
+  [Desmos](#desmos)
 
 <a name="desmos">
 ## Desmos
